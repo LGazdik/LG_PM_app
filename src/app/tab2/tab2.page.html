@@ -1,17 +1,51 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
+  <ion-toolbar color="purp">
+    <ion-title style="text-align: center">
+      <strong>Podrobnosti</strong>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card style="margin: 3%; padding: 3%">
+    <h6><strong>Spoločnosť:</strong></h6>
+    <h6>{{companyN}}</h6>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <h6><strong>Symbol:</strong></h6>
+    <h6>{{companyS}}</h6>
+
+    <h6><strong>Priemerná nákupná cena za 50 dní</strong></h6>
+    <h6>{{MovingAverage50}}</h6>
+
+    <h6><strong>Priemerná nákupná cena za 200 dní</strong></h6>
+    <h6>{{MovingAverage200}}</h6>
+
+    <div>
+      <ion-button (click)="loadEarnings()" color="purp">Zobraziť</ion-button>
+    </div>
+
+    <div>
+      <ion-button disabled="{{disabledB}}" (click)="switchYQ()" 
+      color="purp">R to Q</ion-button>
+    </div>
+  </ion-card>
+
+  <ion-card style="margin: 3%" [hidden]="ishiddenY">
+    <h5 style="padding: 3%">Zisk na 1 akciu v danom roku</h5>
+    <ion-list style="padding-right: 3%">
+      <ion-item *ngFor="let item of companyEarnsYearly">
+        {{item.date}}, cena 1 akcie: <strong>{{ item.value }}</strong>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card style="margin: 3%" [hidden]="ishiddenQ">
+    <h5 style="padding: 3%">Zisk na 1 akciu v danom kvartáli</h5>
+    <ion-list style="padding-right: 3%">
+      <ion-item *ngFor="let item of companyEarnsQuart">
+        {{item.date}}, cena 1 akcie: <strong>{{ item.value }}</strong>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
 </ion-content>

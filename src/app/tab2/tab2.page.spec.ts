@@ -9,7 +9,7 @@ describe('Tab2Page', () => {
   let fixture: ComponentFixture<Tab2Page>;
 
   beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+     TestBed.configureTestingModule({
       declarations: [Tab2Page],
       imports: [IonicModule.forRoot(), ExploreContainerComponentModule]
     }).compileComponents();

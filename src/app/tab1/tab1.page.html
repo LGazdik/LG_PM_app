@@ -1,17 +1,47 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
+  <ion-toolbar color="purp">
+    <ion-title style="text-align: center">
+      <strong>Spoločnosti</strong>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-card style="margin: 3%; padding: 3%">
+    <ion-searchbar animated 
+      (ionChange)="getItems($event)"
+      [(ngModel)]="companyNam" 
+      placeholder="Názov spoločnosti" 
+      debounce="1000">
+    </ion-searchbar>
+
+    <ion-list>
+      <ion-item (click)="returnSymbol(item.symbol)" *ngFor="let item of compArray">
+        {{item.symbol}} - {{ item.name }}
+      </ion-item>
+    </ion-list>
+
+    <ion-input
+      clearInput
+      [(ngModel)]="companySym"
+      autocapitalize="characters"
+      placeholder="Tu zadaj symbol spoločnosti">
+    </ion-input>
+
+    <ion-button (click)="loadOverview()" color="purp">Hľadať</ion-button>
+    <ion-button (click)="clr()" color="purp">Zmazať</ion-button>
+  </ion-card>
+
+  <ion-card style="margin: 3%" [hidden]="ishidden">
+    <h6 style="margin-left: 3%; margin-right: 3%"><strong>Názov spoločnosti: </strong> {{data.Name}}</h6>
+    <h6 style="margin-left: 3%; margin-right: 3%"><strong>Krajina: </strong> {{data.Country}}</h6>
+    <h6 style="margin-left: 3%; margin-right: 3%"><strong>Mena: </strong> {{data.Currency}}</h6>
+    <h6 style="margin-left: 3%; margin-right: 3%"><strong>Adresa: </strong> {{data.Address}}</h6>
+    <h6 style="margin-left: 3%; margin-right: 3%"><strong>Sektor: </strong> {{data.Sector}}</h6>
+    <h6 style="margin-left: 3%; margin-right: 3%"><strong>Odvetvie: </strong> {{data.Industry}}</h6>
+    <h6 style="margin-left: 3%; margin-right: 3%"><strong>Tržná kapitalizácia ($): </strong> {{data.MarketCapitalization}}</h6>
+    <h6 style="margin-left: 3%; margin-right: 3%"><strong>Popis: </strong> {{data.Description}}</h6>
+  </ion-card>
+
 </ion-content>

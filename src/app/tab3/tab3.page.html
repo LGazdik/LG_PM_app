@@ -1,17 +1,83 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
+  <ion-toolbar color="purp">
+    <ion-title style="text-align: center">
+      <strong>Kurzy</strong>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  
+  <ion-card style="margin: 5%; padding: 5%">
+    <ion-item>
+      <ion-label position="floating">Z meny</ion-label>
+      <ion-input
+        (ionFocus)="firstFo()" (ionBlur)="firstBl()"
+        clearInput
+        [(ngModel)]="cur1"
+        autocapitalize="on"
+        placeholder="prvá mena"
+        style="margin-padding: 5%"
+      ></ion-input>
+    </ion-item>
+    <div>
+      <ion-list [hidden]="isHiddenF" *ngFor="let x of curStore">
+        <ion-item>{{x}}</ion-item>
+      </ion-list>
+    </div>
+    
+    <ion-item>
+      <ion-label position="floating">Na menu</ion-label>
+      <ion-input
+        (ionFocus)="secondFo()" (ionBlur)="secondBl()"
+        clearInput
+        [(ngModel)]="cur2"
+        autocapitalize="on"
+        placeholder="druhá mena"
+        style="margin-padding: 5%"
+      ></ion-input>
+    </ion-item>      
+    <div>
+      <ion-list [hidden]="isHiddenS" *ngFor="let x of curStore">
+        <ion-item>{{x}}</ion-item>
+      </ion-list>
+    </div>
+    
+    <ion-item>
+      <ion-label position="floating">Počet</ion-label>
+      <ion-input
+      clearInput
+      type="number"
+      [(ngModel)]="count"
+      placeholder="počet"
+      style="margin-padding: 5%"
+      ></ion-input>
+    </ion-item>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+    <ion-button color="purp" (click)="loadCurrencyExchange()" style="margin-top: 5%">
+      Find
+    </ion-button>
+    
+    <ion-button color="purp" (click)="clr()" style="margin-top: 5%">
+      Clear
+    </ion-button>
+
+    <ion-button color="purp" (click)="swi()" style="margin-top: 5%">
+      <ion-icon name="swap-vertical-outline"></ion-icon>
+    </ion-button>
+    
+    <ion-button color="purp" (click)="clearS()" style="margin-top: 5%">
+      <ion-icon name="trash-bin-outline"></ion-icon>
+    </ion-button>
+
+  </ion-card>
+
+  <ion-card style="margin: 5%" [hidden]="ishidden">
+    <h5 style="margin: 5%"> <strong>{{mena1}}</strong> </h5> 
+    <h5 style="margin: 5%">to</h5> 
+    <h5 style="margin: 5%"> <strong>{{mena2}}</strong> </h5>
+    <h4 style="margin-left: 5%">1 {{cur1}} = {{exRate}} {{cur2}}</h4>
+    <h4 style="margin-left: 5%">{{count}} {{cur1}} = {{exRateModif}} {{cur2}}</h4>
+  </ion-card>
+
 </ion-content>
